@@ -1,0 +1,14 @@
+{
+  "name": "xcersoylu-ynft_import3",
+  "version": "1.0.0",
+  "description": "xcersoylu-YNFT_IMPORT3",
+  "repositoryLayout": {
+    "formatVersion": 5,
+    "format": "json",
+    "objectStorage": "plain",
+    "metaInformation": ".gctsmetadata/",
+    "tableContent": "true",
+    "readableSource": "false",
+    "keepClient": "false"
+  }
+}

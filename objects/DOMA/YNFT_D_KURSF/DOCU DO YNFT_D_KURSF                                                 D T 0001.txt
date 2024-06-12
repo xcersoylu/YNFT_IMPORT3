@@ -1,0 +1,12 @@
+U1 &DEFINITION&                                                            
+AS Bei der Erfassung von Belegen in Fremdwaehrung kann der                 
+/  Umrechnungskurs der Fremdwaehrung in diesem Feld explizit               
+/  vorgegeben werden. Unterbleibt eine Eingabe, so erfolgen                
+/  Umrechnungen zum gueltigen Mittelkurs in der Tabelle CUR.               
+/  Der dort eingetragene Kurs wird dann automatisch in dieses              
+/  Feld uebernommen.                                                       
+/                                                                          
+AS Bei direkter Eingabe des Kurses wird ein Vergleich mit der              
+/  Tabelle CUR durchgefuehrt. Ist die Abweichung groesser als              
+/  der in Tabelle 001 eingetragene Prozentsatz, erscheint ein              
+/  entsprechender Hinweis.                                                 

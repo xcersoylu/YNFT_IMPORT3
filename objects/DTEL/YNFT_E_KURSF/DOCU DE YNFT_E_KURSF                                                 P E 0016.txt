@@ -1,0 +1,10 @@
+U1 Definition                                                              
+AS Taxa com a qual se efetua o câmbio entre moeda estrangeira e moeda      
+   interna.                                                                
+U1 Procedimento                                                            
+AS Em transações de entrada, a taxa deve apenas ser indicada se tiver de   
+   ser diferente do câmbio da tabela.                                      
+U1 Dependências                                                            
+AS Caso na entrada de um item exista a possibilidade de entrar manualmente 
+   tanto a moeda interna como a moeda estrangeira, é possível que daqui    
+   resulte uma taxa diferente da do campo "Taxa de câmbio".                

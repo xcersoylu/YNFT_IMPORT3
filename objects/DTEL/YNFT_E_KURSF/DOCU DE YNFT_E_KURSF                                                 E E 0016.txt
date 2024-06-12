@@ -1,0 +1,10 @@
+U1 Definition                                                              
+AS Exchange rate used for the translation between foreign currency and     
+   local currency.                                                         
+U1 Procedure                                                               
+AS In entry transactions, you only specify the exchange rate if you want a 
+   different rate to the table rate.                                       
+U1 Dependencies                                                            
+AS If you use the option to enter the local currency and the foreign       
+   currency amount manually when you are entering an item, a different     
+   exchange rate may result than that in the "Exchange Rate" field.        

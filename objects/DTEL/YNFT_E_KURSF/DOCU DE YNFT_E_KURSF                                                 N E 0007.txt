@@ -1,0 +1,11 @@
+U1 &DEFINITION&                                                            
+AS Koers die wordt gebruikt voor omrekening tussen vreemde valuta en eigen 
+   valuta.                                                                 
+U1 &WHAT_TO_DO&                                                            
+AS In invoertransacties hoeft de koers alleen te worden opgegeven als deze 
+   moet verschillen van de tabelkoers.                                     
+U1 &DEPENDENCIES&                                                          
+AS Als bij het invoeren van de positie gebruik wordt gemaakt van de        
+   mogelijkheid om zowel de eigen als de vreemde valuta handmatig in te    
+   voeren, dan kan dit resulteren in een koers die verschilt van het veld  
+   "Wisselkoers".                                                          

@@ -1,0 +1,1 @@
+CLASS ybp_i_nft_ddl_imp_clear_blnc_h DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF yi_nft_ddl_imp_clear_blnc_h.

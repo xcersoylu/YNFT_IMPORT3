@@ -1,0 +1,10 @@
+U1 Definice                                                                
+AS Kurs, pomocí kterého se provádí přepočet mezi cizí a firemní měnou.     
+                                                                           
+U1 Postup                                                                  
+AS V transakcích pořizování se kurz udává jen tehdy, liší-li se od         
+   tabulkového kurzu.                                                      
+U1 Závislosti                                                              
+AS Použije-li se při pořizování položky možnost manuálního zadání jak pro  
+   firemní měnu, tak i pro cizí měnu, může být výsledkem kurz přepočtu,    
+   který se liší od pole "Kurz přepočtu".                                  

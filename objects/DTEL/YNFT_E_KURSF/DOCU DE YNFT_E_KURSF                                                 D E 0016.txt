@@ -1,0 +1,10 @@
+U1 Definition                                                              
+AS Kurs, mit dem die Umrechnung zwischen Fremdwährung und Hauswährung      
+   erfolgt.                                                                
+U1 Vorgehen                                                                
+AS In Erfassungstransaktionen ist der Kurs nur dann anzugeben, wenn vom    
+   Tabellenkurs abgewichen werden soll.                                    
+U1 Abhängigkeiten                                                          
+AS Wird beim Erfassen einer Position die Möglichkeit genutzt, sowohl       
+   Hauswährung als auch Fremdwährungsbetrag manuell einzugeben, kann sich  
+   daraus ein vom Feld "Umrechnungskurs" abweichender Kurs ergeben.        

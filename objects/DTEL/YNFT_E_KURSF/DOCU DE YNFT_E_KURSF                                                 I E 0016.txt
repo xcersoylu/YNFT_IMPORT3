@@ -1,0 +1,10 @@
+U1 Definizione                                                             
+AS Corso di cambio con cui avviene la conversione tra la divisa estera e la
+   divisa interna.                                                         
+U1 Procedura                                                               
+AS Nelle transazioni di acquisizione il corso di cambio deve essere        
+   specificato quando deve divergere dal corso di cambio della tabella.    
+U1 Dipendenze                                                              
+AS Se durante l'acquisizione di una posizione viene utilizzata l'opzione di
+   inserire manualmente sia la divisa interna che quella estera, ne può    
+   risultare un corso di cambio divergente dal campo "a".                  

@@ -1,0 +1,10 @@
+U1 Definition                                                              
+AS Il s'agit du taux auquel la conversion entre la devise étrangère et la  
+   devise interne s'effectue.                                              
+U1 Procédure                                                               
+AS Vous devez indiquer le taux de conversion dans les transactions de      
+   saisie uniquement s'il doit diverger du cours de la table.              
+U1 Dépendances                                                             
+AS Si vous décidez d'entrer manuellement la devise interne et le montant en
+   devise étrangère lorsque vous saisissez un poste, vous pouvez obtenir   
+   un cours divergeant de la zone "Taux de conversion".                    

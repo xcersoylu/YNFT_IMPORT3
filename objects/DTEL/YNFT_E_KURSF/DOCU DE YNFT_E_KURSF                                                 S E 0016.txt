@@ -1,0 +1,11 @@
+U1 Definition                                                              
+AS Tipo de cambio con el que se efectúa la conversión entre moneda         
+   extranjera y moneda local.                                              
+U1 Vorgehen                                                                
+AS En transacciones de entrada, el tipo de cambio solo debe indicarse si   
+   éste debe ser distinto del tipo de cambio de la tabla.                  
+U1 Abhängigkeiten                                                          
+AS Si al registrar una posición se hace uso de la posibilidad de introducir
+   manualmente tanto la moneda local como el importe en moneda extranjera, 
+   de esto puede derivarse un tipo de cambio distinto del campo            
+   "Tipo de cambio".                                                       

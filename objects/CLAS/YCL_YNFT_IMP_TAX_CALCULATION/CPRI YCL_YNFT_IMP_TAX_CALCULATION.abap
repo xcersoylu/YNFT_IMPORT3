@@ -1,4 +1,4 @@
-private section.
+  PRIVATE SECTION.
     DATA: ms_request   TYPE ynft_s_imp_tax_calculate_req,
           ms_response  TYPE ynft_s_imp_tax_calculate_res,
           mv_total_tax TYPE ynft_e_bwert.

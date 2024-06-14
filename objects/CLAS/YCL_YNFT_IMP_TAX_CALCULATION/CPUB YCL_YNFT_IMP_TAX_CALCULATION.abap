@@ -1,7 +1,7 @@
-class YCL_YNFT_IMP_TAX_CALCULATION definition
-  public
-  create public .
+CLASS ycl_ynft_imp_tax_calculation DEFINITION
+  PUBLIC
+  CREATE PUBLIC .
 
-public section.
+  PUBLIC SECTION.
 
-  interfaces IF_HTTP_SERVICE_EXTENSION .
+    INTERFACES if_http_service_extension .

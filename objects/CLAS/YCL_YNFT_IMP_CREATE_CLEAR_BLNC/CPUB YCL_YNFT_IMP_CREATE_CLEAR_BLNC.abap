@@ -1,6 +1,6 @@
 CLASS ycl_ynft_imp_create_clear_blnc DEFINITION
   PUBLIC
-  CREATE PUBLIC .
+  CREATE PUBLIC.
 
   PUBLIC SECTION.
 

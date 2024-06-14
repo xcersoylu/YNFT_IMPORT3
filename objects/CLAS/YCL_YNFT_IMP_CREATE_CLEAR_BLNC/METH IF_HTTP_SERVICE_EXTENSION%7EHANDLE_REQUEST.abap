@@ -22,9 +22,11 @@
     /ui2/cl_json=>deserialize( EXPORTING json = lv_request_body CHANGING data = ms_request ).
 
     DATA(lv_company_code) = VALUE #( ms_request-items[ 1 ]-companycode OPTIONAL ).
-    SELECT SINGLE * FROM ynft_t_t011
-                    WHERE bukrs = @lv_company_code
-                    INTO @DATA(ls_parameter).
+    SELECT SINGLE *
+      FROM ynft_t_t011
+      WHERE bukrs = @lv_company_code
+      INTO @DATA(ls_parameter).
+
     SELECT
       FROM ynft_t_parameter
       FIELDS *
@@ -32,52 +34,52 @@
       INTO TABLE @DATA(lt_parameters).
 
     SELECT
-      FROM @ms_request-items AS selected_lines INNER JOIN ynft_t_r005 AS r005 ON r005~companycode = selected_lines~companycode
-                                                                              AND r005~accountingdocument = selected_lines~accountingdocument
-                                                                              AND r005~fiscalyear = selected_lines~fiscalyear
-                                                                              AND r005~accountingdocumentitem = selected_lines~accountingdocumentitem
-     FIELDS r005~companycode AS companycode,
-            r005~accountingdocument AS accountingdocument,
-            r005~fiscalyear AS fiscalyear,
+      FROM @ms_request-items AS selected_lines
+      INNER JOIN ynft_t_r005 AS r005 ON r005~companycode            = selected_lines~companycode
+                                    AND r005~accountingdocument     = selected_lines~accountingdocument
+                                    AND r005~fiscalyear             = selected_lines~fiscalyear
+                                    AND r005~accountingdocumentitem = selected_lines~accountingdocumentitem
+     FIELDS r005~companycode            AS companycode,
+            r005~accountingdocument     AS accountingdocument,
+            r005~fiscalyear             AS fiscalyear,
             r005~accountingdocumentitem AS accountingdocumentitem,
             MAX( r005~referenceitem ) AS referenceitem
      GROUP BY r005~companycode, r005~accountingdocument, r005~fiscalyear, r005~accountingdocumentitem
      ORDER BY r005~companycode, r005~accountingdocument, r005~fiscalyear, r005~accountingdocumentitem
      INTO TABLE @DATA(lt_r005_check).
 
-    APPEND 'COMPANY_CODE' TO lt_header_pro.
-    APPEND 'DOCUMENT_DATE' TO lt_header_pro.
-    APPEND 'POSTING_DATE' TO lt_header_pro.
+    APPEND 'COMPANY_CODE'               TO lt_header_pro.
+    APPEND 'DOCUMENT_DATE'              TO lt_header_pro.
+    APPEND 'POSTING_DATE'               TO lt_header_pro.
     APPEND 'SUPPLIER_INVOICE_IDBY_INVC' TO lt_header_pro.
-    APPEND 'INVOICING_PARTY' TO lt_header_pro.
-    APPEND 'DOCUMENT_CURRENCY' TO lt_header_pro.
-    APPEND 'DOCUMENT_HEADER_TEXT' TO lt_header_pro.
-    APPEND 'ACCOUNTING_DOCUMENT_TYPE' TO lt_header_pro.
-    APPEND 'TAX_DETERMINATION_DATE' TO lt_header_pro.
+    APPEND 'INVOICING_PARTY'            TO lt_header_pro.
+    APPEND 'DOCUMENT_CURRENCY'          TO lt_header_pro.
+    APPEND 'DOCUMENT_HEADER_TEXT'       TO lt_header_pro.
+    APPEND 'ACCOUNTING_DOCUMENT_TYPE'   TO lt_header_pro.
+    APPEND 'TAX_DETERMINATION_DATE'     TO lt_header_pro.
     APPEND 'SUPPLIER_INVOICE_IS_CREDIT' TO lt_header_pro.
-    APPEND 'PAYMENT_TERMS' TO lt_header_pro.
+    APPEND 'PAYMENT_TERMS'              TO lt_header_pro.
 
-    APPEND 'SUPPLIER_INVOICE_ITEM' TO lt_gl_pro.
-    APPEND 'DEBIT_CREDIT_CODE' TO lt_gl_pro.
-    APPEND 'GLACCOUNT' TO lt_gl_pro.
-    APPEND 'COMPANY_CODE' TO lt_gl_pro.
-    APPEND 'TAX_CODE' TO lt_gl_pro.
-    APPEND 'DOCUMENT_CURRENCY' TO lt_gl_pro.
+    APPEND 'SUPPLIER_INVOICE_ITEM'      TO lt_gl_pro.
+    APPEND 'DEBIT_CREDIT_CODE'          TO lt_gl_pro.
+    APPEND 'GLACCOUNT'                  TO lt_gl_pro.
+    APPEND 'COMPANY_CODE'               TO lt_gl_pro.
+    APPEND 'TAX_CODE'                   TO lt_gl_pro.
+    APPEND 'DOCUMENT_CURRENCY'          TO lt_gl_pro.
     APPEND 'SUPPLIER_INVOICE_ITEM_AMOU' TO lt_gl_pro.
 
-    APPEND 'SUPPLIER_INVOICE_ITEM' TO lt_po_pro.
-    APPEND 'PURCHASE_ORDER' TO lt_po_pro.
-    APPEND 'PURCHASE_ORDER_ITEM' TO lt_po_pro.
-    APPEND 'DOCUMENT_CURRENCY' TO lt_po_pro.
+    APPEND 'SUPPLIER_INVOICE_ITEM'      TO lt_po_pro.
+    APPEND 'PURCHASE_ORDER'             TO lt_po_pro.
+    APPEND 'PURCHASE_ORDER_ITEM'        TO lt_po_pro.
+    APPEND 'DOCUMENT_CURRENCY'          TO lt_po_pro.
     APPEND 'SUPPLIER_INVOICE_ITEM_AMOU' TO lt_po_pro.
-    APPEND 'PURCHASE_ORDER_PRICE_UNIT' TO lt_po_pro.
+    APPEND 'PURCHASE_ORDER_PRICE_UNIT'  TO lt_po_pro.
     APPEND 'PURCHASE_ORDER_QUANTITY_UN' TO lt_po_pro.
     APPEND 'QUANTITY_IN_PURCHASE_ORDER' TO lt_po_pro.
-    APPEND 'TAX_CODE' TO lt_po_pro.
+    APPEND 'TAX_CODE'                   TO lt_po_pro.
     APPEND 'IS_SUBSEQUENT_DEBIT_CREDIT' TO lt_po_pro.
 
     TRY.
-
         DATA(lo_destination) = cl_http_destination_provider=>create_by_comm_arrangement(
                                                      comm_scenario  = VALUE #( lt_parameters[ parameterkey = 'COMM_SCENARIO' ]-value OPTIONAL )
                                                      comm_system_id = VALUE #( lt_parameters[ parameterkey = 'COMM_SYSTEM_ID' ]-value OPTIONAL )
@@ -85,11 +87,11 @@
         lo_http_client = cl_web_http_client_manager=>create_by_http_destination( lo_destination ).
         lo_client_proxy = /iwbep/cl_cp_factory_remote=>create_v2_remote_proxy(
           EXPORTING
-             is_proxy_model_key       = VALUE #( repository_id       = 'DEFAULT'
-                                                 proxy_model_id      = 'YSCM_NFT_SUPPLIER_INVOICE'
-                                                 proxy_model_version = '0001' )
-            io_http_client            = lo_http_client
-            iv_relative_service_root  = '/sap/opu/odata/sap/API_SUPPLIERINVOICE_PROCESS_SRV' ).
+             is_proxy_model_key      = VALUE #( repository_id       = 'DEFAULT'
+                                                proxy_model_id      = 'YSCM_NFT_SUPPLIER_INVOICE'
+                                                proxy_model_version = '0001' )
+            io_http_client           = lo_http_client
+            iv_relative_service_root = '/sap/opu/odata/sap/API_SUPPLIERINVOICE_PROCESS_SRV' ).
         ASSERT lo_http_client IS BOUND.
         LOOP AT ms_request-items INTO DATA(ls_selected_line).
           CLEAR ls_supplier.
@@ -120,8 +122,8 @@
                                                                            company_code               = ls_selected_line-companycode
                                                                            tax_code                   = ls_parameter-mwskz
                                                                            document_currency          = ls_selected_line-documentcurrency
-                                                                           supplier_invoice_item_amou = ls_selected_line-documentcurrenyamount ) )
-                                ).
+                                                                           supplier_invoice_item_amou = ls_selected_line-documentcurrenyamount ) ) ).
+
           TRY.
               lo_request = lo_client_proxy->create_resource_for_entity_set( 'A_SUPPLIER_INVOICE' )->create_request_for_create( ).
               DATA(lo_data_description_node) = lo_request->create_data_descripton_node( ).
@@ -162,16 +164,12 @@
                             fiscalyear_inv          = ls_supplier_return-fiscal_year ) TO lt_r005.
             ms_response-supplierinvoice = ls_supplier_return-supplier_invoice.
             MESSAGE ID ycl_nft_imp_util_class=>mc_msgid
-                    TYPE 'S'
-                    NUMBER 016
-                    WITH ls_supplier_return-supplier_invoice INTO DATA(lv_message).
+               TYPE 'S'
+               NUMBER 016
+               WITH ls_supplier_return-supplier_invoice INTO DATA(lv_message).
             APPEND lv_message TO ms_response-error_messages.
-            FREE lo_request.
-            FREE lo_item_child.
-            FREE lo_item_child2.
-            FREE lo_response.
-            CLEAR ls_r005_check.
-            CLEAR lv_message.
+            FREE: lo_request, lo_item_child, lo_item_child2, lo_response.
+            CLEAR: ls_r005_check, lv_message.
           ENDIF.
         ENDLOOP.
         IF lt_r005 IS NOT INITIAL.

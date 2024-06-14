@@ -154,7 +154,7 @@
     "EDITORDER":1,
     "LOCKED":"",
     "DISPID":0,
-    "R3RELEASE":"795",
+    "R3RELEASE":"",
     "AUTHOR":"",
     "CREATEDON":"2024-05-21",
     "CHANGEDBY":"",
@@ -963,6 +963,7 @@
    },
    {
     "NAME":"YCL_YNFT_IMP_TAX_CALCULATION==CO",
+    "VARCL":"X",
     "DBAPL":"S",
     "DBNA":"D$",
     "SUBC":"I",
@@ -974,6 +975,7 @@
    {
     "NAME":"YCL_YNFT_IMP_TAX_CALCULATION==CP",
     "EDTX":"X",
+    "VARCL":"X",
     "DBAPL":"S",
     "DBNA":"D$",
     "SUBC":"K",
@@ -994,6 +996,7 @@
    },
    {
     "NAME":"YCL_YNFT_IMP_TAX_CALCULATION==CU",
+    "VARCL":"X",
     "DBAPL":"S",
     "DBNA":"D$",
     "SUBC":"I",
